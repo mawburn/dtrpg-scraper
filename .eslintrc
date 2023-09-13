@@ -10,6 +10,7 @@
   "rules": {
     "no-console": ["warn", { "allow": ["error"] }],
     "prettier/prettier": "error",
-    "@typescript-eslint/no-floating-promises": "error"
+    "@typescript-eslint/no-floating-promises": "error",
+    "@typescript-eslint/no-explicit-any": 0
   }
 }

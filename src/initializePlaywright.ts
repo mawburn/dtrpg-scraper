@@ -1,9 +1,10 @@
 import { chromium } from 'playwright-extra'
 import stealth from 'puppeteer-extra-plugin-stealth'
 
-import type { Page, Route, Request } from 'playwright'
+import type { Page, Route, Request, BrowserContext } from 'playwright'
+import { urls } from './constants'
 
-export async function initializePlaywright(): Promise<Page> {
+export async function initializePlaywright(): Promise<{ page: Page; context: BrowserContext }> {
   chromium.use(stealth())
   const browser = await chromium.launch({ headless: true })
 
@@ -21,7 +22,7 @@ export async function initializePlaywright(): Promise<Page> {
 
   const page = await context.newPage()
 
-  await page.goto('https://preview.drivethrurpg.com/', {
+  await page.goto(urls.base, {
     waitUntil: 'domcontentloaded',
   })
 
@@ -31,9 +32,12 @@ export async function initializePlaywright(): Promise<Page> {
     localStorage.setItem('viewedIntro', value)
   }, tenMinutesAgo.toString())
 
-  await page.goto('https://preview.drivethrurpg.com/en/', {
+  await page.goto(urls.base, {
     waitUntil: 'networkidle',
   })
 
-  return page
+  return {
+    page,
+    context,
+  }
 }

@@ -5,7 +5,8 @@
   "license": "UNLICENSED",
   "private": true,
   "scripts": {
-    "start": "ts-node src/index.ts"
+    "start": "ts-node src/index.ts",
+    "lint": "eslint --ext .ts src --fix"
   },
   "dependencies": {
     "add": "^2.0.6",
