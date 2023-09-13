@@ -1,9 +1,11 @@
-import { chromium } from 'playwright'
+import { chromium } from 'playwright-extra'
+import stealth from 'puppeteer-extra-plugin-stealth'
 
 import type { Page, Route, Request } from 'playwright'
 
 export async function initializePlaywright(): Promise<Page> {
-  const browser = await chromium.launch()
+  chromium.use(stealth())
+  const browser = await chromium.launch({ headless: true })
 
   const context = await browser.newContext({
     ignoreHTTPSErrors: true,

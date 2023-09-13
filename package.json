@@ -8,7 +8,11 @@
     "start": "ts-node src/index.ts"
   },
   "dependencies": {
-    "playwright": "^1.37.1"
+    "add": "^2.0.6",
+    "playwright": "^1.37.1",
+    "playwright-extra": "^4.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
+    "yarn": "^1.22.19"
   },
   "devDependencies": {
     "@types/node": "^20.6.0",
