@@ -16,8 +16,7 @@ async function scrapeClassContent(url: string): Promise<string | null> {
   }
 }
 
-// Example usage:
-(async () => {
+void (async () => {
   const url = 'https://www.drivethrurpg.com/index.php'
   const content = await scrapeClassContent(url)
   console.log(content)
