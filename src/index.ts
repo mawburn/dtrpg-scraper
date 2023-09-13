@@ -1,7 +1,9 @@
-import { initializePlaywright } from './initializePlaywright'
+import 'dotenv/config'
+
 import { urls } from './constants'
+import { initializePlaywright } from './initializePlaywright'
+import { upload } from './upload'
 import { dedupe, roundCent, toUrl } from './utils'
-import fs from 'fs'
 
 async function run() {
   const { page, context } = await initializePlaywright()
@@ -30,6 +32,8 @@ async function run() {
   const bestSellingRes = await Promise.all(bestSellingUrls)
   const bestSelling = await Promise.all(bestSellingRes.map(res => res.json()))
 
+  await page?.context()?.browser()?.close()
+
   const links = bestSelling
     .map((b: any) =>
       b.data.map((product: any) => ({
@@ -46,9 +50,8 @@ async function run() {
     .flat()
 
   const bestLinks = dedupe(links)
-  fs.writeFileSync('links.json', JSON.stringify(bestLinks, null, 2))
-
-  await page?.context()?.browser()?.close()
+  await upload(JSON.stringify(bestLinks))
+  console.log('Done')
 }
 
 void (async () => run())()

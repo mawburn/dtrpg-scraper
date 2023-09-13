@@ -1,4 +1,4 @@
-import { urls, affId } from './constants'
+import { affId, urls } from './constants'
 
 export const roundCent = (price: string) => Math.round(Number(price) * 100) / 100
 

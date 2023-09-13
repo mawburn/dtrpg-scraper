@@ -1,8 +1,9 @@
 import { chromium } from 'playwright-extra'
 import stealth from 'puppeteer-extra-plugin-stealth'
 
-import type { Page, Route, Request, BrowserContext } from 'playwright'
 import { urls } from './constants'
+
+import type { Page, Route, Request, BrowserContext } from 'playwright'
 
 export async function initializePlaywright(): Promise<{ page: Page; context: BrowserContext }> {
   chromium.use(stealth())
