@@ -1,26 +1,26 @@
 import 'dotenv/config'
 
 import { urls } from './constants'
-import { initializePlaywright } from './initializePlaywright'
+// import { initializePlaywright } from './initializePlaywright'
 import { upload } from './upload'
-import { apiUrl, dedupe, roundCent, toUrl } from './utils'
+import { apiUrl, cookieId, dedupe, roundCent, toUrl } from './utils'
 
 async function run() {
-  const { page, context } = await initializePlaywright()
+  // const { page, context } = await initializePlaywright()
 
-  if (!page || !context) {
-    console.error('Page is not defined')
-    return
-  }
+  // if (!page || !context) {
+  //   console.error('Page is not defined')
+  //   return
+  // }
 
-  const cookies = await context.cookies([urls.base])
-  const userAgent = await page.evaluate(() => navigator.userAgent)
+  // const cookies = await context.cookies([urls.base])
+  // const userAgent = await page.evaluate(() => navigator.userAgent)
 
-  const cookiesString = cookies.map(cookie => `${cookie.name}=${cookie.value}`).join('; ')
+  // const cookiesString = cookies.map(cookie => `${cookie.name}=${cookie.value}`).join('; ')
 
   const headers = {
-    'User-Agent': userAgent,
-    Cookie: cookiesString,
+    'User-Agent': urls.userAgent,
+    Cookie: cookieId(),
   }
 
   const bestSellingUrls = []
@@ -32,7 +32,7 @@ async function run() {
   const bestSellingRes = await Promise.all(bestSellingUrls)
   const bestSelling = await Promise.all(bestSellingRes.map(res => res.json()))
 
-  await page?.context()?.browser()?.close()
+  // await page?.context()?.browser()?.close()
 
   const links = bestSelling
     .map((b: any) =>
