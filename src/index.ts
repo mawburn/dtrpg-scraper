@@ -3,7 +3,7 @@ import 'dotenv/config'
 import { urls } from './constants'
 import { initializePlaywright } from './initializePlaywright'
 import { upload } from './upload'
-import { dedupe, roundCent, toUrl } from './utils'
+import { apiUrl, dedupe, roundCent, toUrl } from './utils'
 
 async function run() {
   const { page, context } = await initializePlaywright()
@@ -39,6 +39,7 @@ async function run() {
       b.data.map((product: any) => ({
         name: product.attributes.description.name,
         url: toUrl(product.attributes.description.slug, product.attributes.productId),
+        apiUrl: apiUrl(product.attributes.productId),
         slug: product.attributes.description.slug,
         productId: product.attributes.productId,
         onSale: product.attributes.onSale,
