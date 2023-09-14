@@ -41,6 +41,13 @@ async function run() {
         url: toUrl(product.attributes.description.slug, product.attributes.productId),
         slug: product.attributes.description.slug,
         productId: product.attributes.productId,
+        onSale: product.attributes.onSale,
+        isBundle: product.attributes.isBundle,
+        image: product.attributes.image,
+        publisherId: product.attributes.publisherId,
+        publisherName: b.included.find(
+          (p: any) => product.attributes.publisherId === p.attributes.publisherId
+        ).attributes.name,
         prices: {
           pdf: roundCent(product.attributes.lowestDigitalPrice),
           print: roundCent(product.attributes.lowestPrintPrice),
