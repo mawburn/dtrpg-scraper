@@ -25,7 +25,7 @@ async function run() {
 
   const bestSellingUrls = []
 
-  for (let i = 1; i < 3; i++) {
+  for (let i = 1; i < 2; i++) {
     bestSellingUrls.push(fetch(urls.bestSelling.api(i), { method: 'GET', headers }))
   }
 
